@@ -9,17 +9,18 @@ A personal repository delicated to my custom IY theme.
 ![](https://media.discordapp.net/stickers/1031938879290347540.webp?size=160)
 
 # Credit
-#####**Original team of Infinite Yield** (Toon, Edge, Moon, Zwolf) and the contributors.
-#####**Apple** for their hardware, software.
-#####**Be Inc.** & **Haiku Inc.** For their perspective OS.
+##### **Original team of Infinite Yield** (Toon, Edge, Moon, Zwolf) and the contributors.
+##### **Apple** for their hardware, software.
+##### **Be Inc.** & **Haiku Inc.** For their perspective OS.
 
 # Usage
 Execute directly with your external executor — **master** branch
+
 Insert into LocalScript in StarterPlayerScript — **development** branch
 
 ##### ⚠️Development branch does not have `randomstring()` enabled, execute with caution⚠️
 
-#Contributing
+# Contributing
 *Not yet...*
 
 
