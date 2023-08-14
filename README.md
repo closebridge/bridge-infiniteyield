@@ -13,12 +13,17 @@ A personal repository delicated to my custom IY theme.
 ##### **Apple** for their hardware, software.
 ##### **Be Inc.** & **Haiku Inc.** For their perspective OS.
 
+
 # Usage
-Execute directly with your external executor — **master** branch
+### **master** branch — Execute directly with your external executor
+*Does not work if you run this on Roblox Sutdio*
+#### ⚠️Make a backup of your `IY_FE.iy` in Workspace folder!⚠️
 
-Insert into LocalScript in StarterPlayerScript — **development** branch
 
-##### ⚠️Development branch does not have `randomstring()` enabled, execute with caution⚠️
+### **development** branch — Insert into LocalScript in StarterPlayerScript 
+*development branch does not have Plugin, Colour Picker, writefile/readfile and use different UI parent for compatibilty*
+#### ⚠️Development branch does not have `randomstring()` enabled, execute with caution⚠️
+
 
 # Contributing
 *Not yet...*
