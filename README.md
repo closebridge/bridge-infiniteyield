@@ -14,14 +14,14 @@ A personal repository delicated to my custom IY theme.
 ##### **Be Inc.** & **Haiku Inc.** For their perspective OS (BeOs, Haiku-OS).
 
 # Usage
+**Master branch**
 Execute directly with your external executor — **master** branch
 *Does not work if you run this on Roblox Sutdio*
 ##### ⚠️Make a backup of your `IY_FE.iy` in Workspace folder!⚠️
 
 
-
+**Development branch**
 Insert into LocalScript in StarterPlayerScript — **development** branch
-
 *development branch does not have Plugin, Colour Picker, writefile/readfile and use different UI parent for compatibilty*
 ##### ⚠️Development branch does not have `randomstring()` enabled, execute with caution⚠️
 
