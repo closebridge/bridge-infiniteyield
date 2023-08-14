@@ -9,18 +9,24 @@ A personal repository delicated to my custom IY theme.
 ![](https://media.discordapp.net/stickers/1031938879290347540.webp?size=160)
 
 # Credit
-##### **Original team of Infinite Yield** (Toon, Edge, Moon, Zwolf) and the contributors.
-##### **Apple** for their hardware, software.
-##### **Be Inc.** & **Haiku Inc.** For their perspective OS.
+**Original team of Infinite Yield** (Toon, Edge, Moon, Zwolf) and the contributors.
+
+**Apple** for their hardware, software.
+
+**Be Inc.** & **Haiku Inc.** For their perspective OS.
+
 
 
 # Usage
-### **master** branch — Execute directly with your external executor
+### **Master** branch
+Execute directly with your external executor
 *Does not work if you run this on Roblox Sutdio*
-#### ⚠️Make a backup of your `IY_FE.iy` in Workspace folder!⚠️
+
+*Recommended to make a backup of your `IY_FE.iy` file in Workspace folder!*
 
 
-### **development** branch — Insert into LocalScript in StarterPlayerScript 
+### **Development** branch
+Insert into LocalScript in StarterPlayerScript 
 *development branch does not have Plugin, Colour Picker, writefile/readfile and use different UI parent for compatibilty*
 #### ⚠️Development branch does not have `randomstring()` enabled, execute with caution⚠️
 
