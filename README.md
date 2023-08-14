@@ -1,23 +1,26 @@
-# Infinite Yield 
-[![Discord](https://media.discordapp.net/attachments/338403017894395905/668536741942263808/Discord-Logo-Color.png)](https://discord.io/infiniteyield)
-The best command line script for roblox.
+# Infinite Yield -- TAM's Tribute
+A personal repository delicated to my custom IY theme.
 
-Get it [here](https://github.com/EdgeIY/infiniteyield/wiki)
+![](https://media.discordapp.net/attachments/1127984104294592603/1140300769753567402/I-think-it_s-good.webp?width=336&height=432)
 
- - Currently 377 commands
- - Open Source
- - 6 years of development
+# Theme showcase
+*coming soon*
 
-## Developers
-### Creator: Edge
+![](https://media.discordapp.net/stickers/1031938879290347540.webp?size=160)
 
-### Developer: Moon
-### Developer: Zwolf
-### Developer: Toon
+# Credit
+##### **Original team of Infinite Yield** (Toon, Edge, Moon, Zwolf) and the contributors.
+##### **Apple** for their hardware, software.
+##### **Be Inc.** & **Haiku Inc.** For their perspective OS.
+
+# Usage
+Execute directly with your external executor — **master** branch
+
+Insert into LocalScript in StarterPlayerScript — **development** branch
+
+##### ⚠️Development branch does not have `randomstring()` enabled, execute with caution⚠️
+
+# Contributing
+*Not yet...*
 
 
-## Usage
-You can learn how to use all the features of this script in the wiki!
-
-## Contributing
-There is no specific rules on contributing (as of now) just open a pull request and if it checks out we will merge it!
