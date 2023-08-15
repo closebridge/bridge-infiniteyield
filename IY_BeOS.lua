@@ -1,11 +1,5 @@
-if IY_LOADED and not _G.IY_DEBUG == true then
-	-- error("Infinite Yield is already running!",0)
-	return
-end
 
-pcall(function() getgenv().IY_LOADED = true end)
-
-COREGUI = game:GetService("CoreGui")
+COREGUI = game:GetService("Players").LocalPlayer.PlayerGui
 if not game:IsLoaded() then
 	local notLoaded = Instance.new("Message")
 	notLoaded.Parent = COREGUI
@@ -160,27 +154,12 @@ function randomString()
 	return table.concat(array)
 end
 
-PARENT = nil
-if get_hidden_gui or gethui then
-	local hiddenUI = get_hidden_gui or gethui
+
 local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	Main.Parent = hiddenUI()
-	PARENT = Main
-elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
-	local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	syn.protect_gui(Main)
+Main.Name = ("Main")
 Main.Parent = COREGUI
 PARENT = Main
-elseif COREGUI:FindFirstChild('RobloxGui') then
-	PARENT = COREGUI.RobloxGui
-else
-	local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	Main.Parent = COREGUI
-	PARENT = Main
-end
+
 
 shade1 = {}
 shade2 = {}
@@ -189,7 +168,7 @@ text1 = {}
 text2 = {}
 scroll = {}
 
-Holder.Name = randomString()
+Holder.Name = ("Holder")
 Holder.Parent = PARENT
 Holder.Active = true
 Holder.BackgroundColor3 = Color3.fromRGB(191, 191, 191)
@@ -248,7 +227,7 @@ Topbar = Instance.new("ImageLabel")
 Topbar.Parent = Holder
 Topbar.Size = UDim2.new(0,250,0,20)
 Topbar.BorderSizePixel = 0
-Topbar.Image = "rbxassetid://14402997377"
+Topbar.Image = "rbxassetid://14430851867"
 Topbar.Transparency = 1
 Topbar.ZIndex = 10
 
@@ -299,9 +278,9 @@ cmdListLayout.Parent = CMDsF
 SettingsButton.Name = "SettingsButton"
 SettingsButton.Parent = Holder
 SettingsButton.BackgroundTransparency = 1
-SettingsButton.Position = UDim2.new(0, 119, 0, 1)
-SettingsButton.Size = UDim2.new(0.16, 16, 0.014, 15)
-SettingsButton.Image = "rbxassetid://14421079130"
+SettingsButton.Position = UDim2.new(0, 119, 0, 0)
+SettingsButton.Size = UDim2.new(0.25, 16, 0.021, 15)
+SettingsButton.Image = "rbxassetid://14430855273"
 SettingsButton.ZIndex = 11
 
 ReferenceButton = Instance.new("ImageButton")
@@ -510,7 +489,7 @@ Example.TextXAlignment = Enum.TextXAlignment.Left
 Example.ZIndex = 10
 table.insert(text1,Example)
 
-Notification.Name = randomString()
+Notification.Name = ("Notification")
 Notification.Parent = PARENT
 Notification.BackgroundColor3 = Color3.fromRGB(209, 209, 209)
 Notification.BorderSizePixel = 0
@@ -540,10 +519,10 @@ TitleImage.Name = "TitleImage"
 TitleImage.Parent = Title_2
 TitleImage.BackgroundColor3 = Color3.new(1, 1, 1)
 TitleImage.BackgroundTransparency = 1
-TitleImage.Position = UDim2.new(1, -256, 0, -1)
+TitleImage.Position = UDim2.new(1, -255, 0, 0)
 TitleImage.Size = UDim2.new(0, 111, 0.1, 17)
 TitleImage.ZIndex = 10
-TitleImage.Image = "rbxassetid://14418438020"
+TitleImage.Image = "rbxassetid://14430853760"
 
 Text_2.Name = "Text"
 Text_2.Parent = Notification
@@ -586,12 +565,12 @@ PinButton.Text = ""
 PinImage.Parent = PinButton
 PinImage.BackgroundColor3 = Color3.new(1, 1, 1)
 PinImage.BackgroundTransparency = 1
-PinImage.Position = UDim2.new(0, 3, 0, 0)
-PinImage.Size = UDim2.new(0.1, 14, 0.1, 14)
+PinImage.Position = UDim2.new(0, 4, 0, 1)
+PinImage.Size = UDim2.new(0, 14, 0, 14)
 PinImage.ZIndex = 10
 PinImage.Image = "rbxassetid://14402832566"
 
-Tooltip.Name = randomString()
+Tooltip.Name = ("Tooltip")
 Tooltip.Parent = PARENT
 Tooltip.Active = true
 Tooltip.BackgroundColor3 = Color3.fromRGB(209, 209, 209)
@@ -768,7 +747,7 @@ Delete_2.ZIndex = 10
 table.insert(shade3,Delete_2)
 table.insert(text2,Delete_2)
 
-KeybindEditor.Name = randomString()
+KeybindEditor.Name = ("KeybindEditor")
 KeybindEditor.Parent = PARENT
 KeybindEditor.Active = true
 KeybindEditor.BackgroundTransparency = 1
@@ -1342,7 +1321,7 @@ Delete_7.ZIndex = 10
 table.insert(shade3,Delete_7)
 table.insert(text2,Delete_7)
 
-PluginEditor.Name = randomString()
+PluginEditor.Name = ("PluginEditor")
 PluginEditor.Parent = PARENT
 PluginEditor.BorderSizePixel = 0
 PluginEditor.Active = true
@@ -1518,7 +1497,7 @@ PositionsHint.TextWrapped = true
 PositionsHint.ZIndex = 10
 table.insert(text1,PositionsHint)
 
-ToPartFrame.Name = randomString()
+ToPartFrame.Name = ("ToPartFrame")
 ToPartFrame.Parent = PARENT
 ToPartFrame.Active = true
 ToPartFrame.BackgroundTransparency = 1
@@ -1631,7 +1610,7 @@ ExitImage_5.Size = UDim2.new(0, 10, 0, 10)
 ExitImage_5.Image = "rbxassetid://14402999641"
 ExitImage_5.ZIndex = 10
 
-logs.Name = randomString()
+logs.Name = ("logs")
 logs.Parent = PARENT
 logs.Active = true
 logs.BackgroundTransparency = 1
@@ -1971,17 +1950,9 @@ ProximityPromptService = game:GetService("ProximityPromptService")
 StatsService = game:GetService("Stats")
 MaterialService = game:GetService("MaterialService")
 
-sethidden = sethiddenproperty or set_hidden_property or set_hidden_prop
-gethidden = gethiddenproperty or get_hidden_property or get_hidden_prop
-queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
-httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+
 PlaceId, JobId = game.PlaceId, game.JobId
 
-function writefileExploit()
-	if writefile then
-		return true
-	end
-end
 
 function isNumber(str)
 	if tonumber(str) ~= nil or str == 'inf' then
@@ -2246,7 +2217,7 @@ eventEditor = (function()
 		{52,"TextButton",{BackgroundColor3=currentShade1,BorderSizePixel=0,Font=3,Name="Settings",Parent={49},Position=UDim2.new(1,-40,0,0),Size=UDim2.new(0,20,0,20),Text="",TextColor3=Color3.new(64,64,64),TextSize=18,ZIndex=10,}},
 		{53,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image="rbxassetid://1204397029",Parent={52},Position=UDim2.new(0,2,0,2),Size=UDim2.new(0,16,0,16),ZIndex=10,}},
 	})
-	main.Name = randomString()
+	main.Name = ("main")
 	local mainFrame = main:WaitForChild("Content")
 	local eventList = mainFrame:WaitForChild("List")
 	local eventListHolder = eventList:WaitForChild("Holder")
@@ -2839,52 +2810,6 @@ defaultsettings = {
 }
 
 defaults = HttpService:JSONEncode(defaultsettings)
-nosaves = false
-
-local loadedEventData = nil
-function saves()
-	if writefileExploit() then
-		if pcall(function() readfile("IY_FE.iy") end) then
-			if readfile("IY_FE.iy") ~= nil then
-				local success, response = pcall(function()
-					local json = HttpService:JSONDecode(readfile("IY_FE.iy"))
-					if json.prefix ~= nil then prefix = json.prefix else prefix = ';' end
-					if json.StayOpen ~= nil then StayOpen = json.StayOpen else StayOpen = false end
-					if json.keepIY ~= nil then KeepInfYield = json.keepIY else KeepInfYield = true end
-					if json.espTransparency ~= nil then espTransparency = json.espTransparency else espTransparency = 0.3 end
-					if json.logsEnabled ~= nil then logsEnabled = json.logsEnabled else logsEnabled = false end
-					if json.jLogsEnabled ~= nil then jLogsEnabled = json.jLogsEnabled else jLogsEnabled = false end
-					if json.aliases ~= nil then aliases = json.aliases else aliases = {} end
-					if json.binds ~= nil then binds = (json.binds or {}) else binds = {} end
-					if json.spawnCmds ~= nil then spawnCmds = json.spawnCmds end
-					if json.WayPoints ~= nil then AllWaypoints = json.WayPoints else WayPoints = {} AllWaypoints = {} end
-					if json.PluginsTable ~= nil then PluginsTable = json.PluginsTable else PluginsTable = {} end
-					if json.currentShade1 ~= nil then currentShade1 = Color3.new(json.currentShade1[1],json.currentShade1[2],json.currentShade1[3]) end
-					if json.currentShade2 ~= nil then currentShade2 = Color3.new(json.currentShade2[1],json.currentShade2[2],json.currentShade2[3]) end
-					if json.currentShade3 ~= nil then currentShade3 = Color3.new(json.currentShade3[1],json.currentShade3[2],json.currentShade3[3]) end
-					if json.currentText1 ~= nil then currentText1 = Color3.new(json.currentText1[1],json.currentText1[2],json.currentText1[3]) end
-					if json.currentText2 ~= nil then currentText2 = Color3.new(json.currentText2[1],json.currentText2[2],json.currentText2[3]) end
-					if json.currentScroll ~= nil then currentScroll = Color3.new(json.currentScroll[1],json.currentScroll[2],json.currentScroll[3]) end
-					if json.eventBinds ~= nil then loadedEventData = json.eventBinds end
-				end)
-				if not success then
-					warn("Save Json Error:", response)
-					warn("Overwriting Save File")
-					writefileCooldown("IY_FE.iy", defaults)
-					wait()
-					saves()
-				end
-			else
-				writefileCooldown("IY_FE.iy", defaults)
-				wait()
-				saves()
-			end
-		else
-			writefileCooldown("IY_FE.iy", defaults)
-			wait()
-			if pcall(function() readfile("IY_FE.iy") end) then
-				saves()
-			else
 nosaves = true
 prefix = ';'
 StayOpen = false
@@ -2897,127 +2822,6 @@ binds = {}
 WayPoints = {}
 PluginsTable = {}
 
-				local FileError = Instance.new("Frame")
-				local background = Instance.new("Frame")
-				local Directions = Instance.new("TextLabel")
-				local shadow = Instance.new("Frame")
-				local PopupText = Instance.new("TextLabel")
-				local Exit = Instance.new("TextButton")
-				local ExitImage = Instance.new("ImageLabel")
-
-				FileError.Name = randomString()
-				FileError.Parent = PARENT
-				FileError.Active = true
-				FileError.BackgroundTransparency = 1
-				FileError.Position = UDim2.new(0.5, -180, 0, 290)
-				FileError.Size = UDim2.new(0, 360, 0, 20)
-				FileError.ZIndex = 10
-
-				background.Name = "background"
-				background.Parent = FileError
-				background.Active = true
-				background.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-				background.BorderSizePixel = 0
-				background.Position = UDim2.new(0, 0, 0, 20)
-				background.Size = UDim2.new(0, 360, 0, 205)
-				background.ZIndex = 10
-
-				Directions.Name = "Directions"
-				Directions.Parent = background
-				Directions.BackgroundTransparency = 1
-				Directions.BorderSizePixel = 0
-				Directions.Position = UDim2.new(0, 10, 0, 10)
-				Directions.Size = UDim2.new(0, 340, 0, 185)
-				Directions.Font = Enum.Font.SourceSans
-				Directions.TextSize = 14
-				Directions.Text = "There was a problem writing a save file to your PC.\n\nPlease contact the developer/support team for your exploit and tell them writefile is not working.\n\nYour settings, keybinds, waypoints, and aliases will not save if you continue.\n\nThings to try:\n> Make sure a 'workspace' folder is located in the same folder as your exploit\n> If your exploit is inside of a zip/rar file, extract it.\n> Rejoin the game and try again or restart your PC and try again."
-				Directions.TextColor3 = Color3.new(1, 1, 1)
-				Directions.TextWrapped = true
-				Directions.TextXAlignment = Enum.TextXAlignment.Left
-				Directions.TextYAlignment = Enum.TextYAlignment.Top
-				Directions.ZIndex = 10
-
-				shadow.Name = "shadow"
-				shadow.Parent = FileError
-				shadow.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-				shadow.BorderSizePixel = 0
-				shadow.Size = UDim2.new(0, 360, 0, 20)
-				shadow.ZIndex = 10
-
-				PopupText.Name = "PopupText"
-				PopupText.Parent = shadow
-				PopupText.BackgroundTransparency = 1
-				PopupText.Size = UDim2.new(1, 0, 0.95, 0)
-				PopupText.ZIndex = 10
-				PopupText.Font = Enum.Font.SourceSans
-				PopupText.TextSize = 14
-				PopupText.Text = "File Error"
-				PopupText.TextColor3 = Color3.new(1, 1, 1)
-				PopupText.TextWrapped = true
-
-				Exit.Name = "Exit"
-				Exit.Parent = shadow
-				Exit.BackgroundTransparency = 1
-				Exit.Position = UDim2.new(1, -20, 0, 0)
-				Exit.Size = UDim2.new(0, 20, 0, 20)
-				Exit.Text = ""
-				Exit.ZIndex = 10
-
-				ExitImage.Parent = Exit
-				ExitImage.BackgroundColor3 = Color3.new(1, 1, 1)
-				ExitImage.BackgroundTransparency = 1
-				ExitImage.Position = UDim2.new(0, 5, 0, 5)
-				ExitImage.Size = UDim2.new(0, 10, 0, 10)
-				ExitImage.Image = "rbxassetid://5054663650"
-				ExitImage.ZIndex = 10
-
-				Exit.MouseButton1Click:Connect(function()
-					FileError:Destroy()
-				end)
-			end
-		end
-	else
-		prefix = ';'
-		StayOpen = false
-		KeepInfYield = true
-		espTransparency = 0.3
-		logsEnabled = false
-		jLogsEnabled = false
-		aliases = {}
-		binds = {}
-		WayPoints = {}
-		PluginsTable = {}
-	end
-end
-
-saves()
-
-function updatesaves()
-	if nosaves == false and writefileExploit() then
-		local update = {
-			prefix = prefix;
-			StayOpen = StayOpen;
-			keepIY = KeepInfYield;
-			espTransparency = espTransparency;
-			logsEnabled = logsEnabled;
-			jLogsEnabled = jLogsEnabled;
-			aliases = aliases;
-			binds = binds or {};
-			WayPoints = AllWaypoints;
-			PluginsTable = PluginsTable;
-			currentShade1 = {currentShade1.R,currentShade1.G,currentShade1.B};
-			currentShade2 = {currentShade2.R,currentShade2.G,currentShade2.B};
-			currentShade3 = {currentShade3.R,currentShade3.G,currentShade3.B};
-			currentText1 = {currentText1.R,currentText1.G,currentText1.B};
-			currentText2 = {currentText2.R,currentText2.G,currentText2.B};
-			currentScroll = {currentScroll.R,currentScroll.G,currentScroll.B};
-			eventBinds = eventEditor.SaveData()
-		}
-		writefileCooldown("IY_FE.iy", HttpService:JSONEncode(update))
-	end
-end
-
-eventEditor.SetOnEdited(updatesaves)
 
 pWayPoints = {}
 WayPoints = {}
@@ -3193,13 +2997,13 @@ function CreateJoinLabel(plr,ID)
 	local info1 = Instance.new("TextLabel")
 	local info2 = Instance.new("TextLabel")
 	local ImageLabel_3 = Instance.new("ImageLabel")
-	infoFrame.Name = randomString()
+	infoFrame.Name = ("infoFrame")
 	infoFrame.Parent = scroll_3
 	infoFrame.BackgroundColor3 = Color3.new(1, 1, 1)
 	infoFrame.BackgroundTransparency = 1
 	infoFrame.BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843)
 	infoFrame.Size = UDim2.new(1, 0, 0, 50)
-	info1.Name = randomString()
+	info1.Name = ("Info1")
 	info1.Parent = infoFrame
 	info1.BackgroundTransparency = 1
 	info1.BorderSizePixel = 0
@@ -3212,7 +3016,7 @@ function CreateJoinLabel(plr,ID)
 	info1.TextColor3 = Color3.new(64, 64, 64)
 	info1.TextWrapped = true
 	info1.TextXAlignment = Enum.TextXAlignment.Left
-	info2.Name = randomString()
+	info2.Name = ("Info2")
 	info2.Parent = infoFrame
 	info2.BackgroundTransparency = 1
 	info2.BorderSizePixel = 0
@@ -3307,434 +3111,6 @@ function updateColors(color,ctype)
 end
 
 local colorpickerOpen = false
-ColorsButton.MouseButton1Click:Connect(function()
-	cache_currentShade1 = currentShade1
-	cache_currentShade2 = currentShade2
-	cache_currentShade3 = currentShade3
-	cache_currentText1 = currentText1
-	cache_currentText2 = currentText2
-	cache_currentScroll = currentScroll
-	if not colorpickerOpen then
-		colorpickerOpen = true
-		picker = game:GetObjects("rbxassetid://4908465318")[1]
-		picker.Name = randomString()
-		picker.Parent = PARENT
-
-		local ColorPicker do
-			ColorPicker = {}
-
-			ColorPicker.new = function()
-				local newMt = setmetatable({},{})
-
-				local pickerGui = picker.ColorPicker
-				local pickerTopBar = pickerGui.TopBar
-				local pickerExit = pickerTopBar.Exit
-				local pickerFrame = pickerGui.Content
-				local colorSpace = pickerFrame.ColorSpaceFrame.ColorSpace
-				local colorStrip = pickerFrame.ColorStrip
-				local previewFrame = pickerFrame.Preview
-				local basicColorsFrame = pickerFrame.BasicColors
-				local customColorsFrame = pickerFrame.CustomColors
-				local defaultButton = pickerFrame.Default
-				local cancelButton = pickerFrame.Cancel
-				local shade1Button = pickerFrame.Shade1
-				local shade2Button = pickerFrame.Shade2
-				local shade3Button = pickerFrame.Shade3
-				local text1Button = pickerFrame.Text1
-				local text2Button = pickerFrame.Text2
-				local scrollButton = pickerFrame.Scroll
-
-				local colorScope = colorSpace.Scope
-				local colorArrow = pickerFrame.ArrowFrame.Arrow
-
-				local hueInput = pickerFrame.Hue.Input
-				local satInput = pickerFrame.Sat.Input
-				local valInput = pickerFrame.Val.Input
-
-				local redInput = pickerFrame.Red.Input
-				local greenInput = pickerFrame.Green.Input
-				local blueInput = pickerFrame.Blue.Input
-
-				local mouse = IYMouse
-
-				local hue,sat,val = 0,0,1
-				local red,green,blue = 1,1,1
-				local chosenColor = Color3.new(0,0,0)
-
-				local basicColors = {Color3.new(0,0,0),Color3.new(0.66666668653488,0,0),Color3.new(0,0.33333334326744,0),Color3.new(0.66666668653488,0.33333334326744,0),Color3.new(0,0.66666668653488,0),Color3.new(0.66666668653488,0.66666668653488,0),Color3.new(0,1,0),Color3.new(0.66666668653488,1,0),Color3.new(0,0,0.49803924560547),Color3.new(0.66666668653488,0,0.49803924560547),Color3.new(0,0.33333334326744,0.49803924560547),Color3.new(0.66666668653488,0.33333334326744,0.49803924560547),Color3.new(0,0.66666668653488,0.49803924560547),Color3.new(0.66666668653488,0.66666668653488,0.49803924560547),Color3.new(0,1,0.49803924560547),Color3.new(0.66666668653488,1,0.49803924560547),Color3.new(0,0,1),Color3.new(0.66666668653488,0,1),Color3.new(0,0.33333334326744,1),Color3.new(0.66666668653488,0.33333334326744,1),Color3.new(0,0.66666668653488,1),Color3.new(0.66666668653488,0.66666668653488,1),Color3.new(0,1,1),Color3.new(0.66666668653488,1,1),Color3.new(0.33333334326744,0,0),Color3.new(1,0,0),Color3.new(0.33333334326744,0.33333334326744,0),Color3.new(1,0.33333334326744,0),Color3.new(0.33333334326744,0.66666668653488,0),Color3.new(1,0.66666668653488,0),Color3.new(0.33333334326744,1,0),Color3.new(1,1,0),Color3.new(0.33333334326744,0,0.49803924560547),Color3.new(1,0,0.49803924560547),Color3.new(0.33333334326744,0.33333334326744,0.49803924560547),Color3.new(1,0.33333334326744,0.49803924560547),Color3.new(0.33333334326744,0.66666668653488,0.49803924560547),Color3.new(1,0.66666668653488,0.49803924560547),Color3.new(0.33333334326744,1,0.49803924560547),Color3.new(1,1,0.49803924560547),Color3.new(0.33333334326744,0,1),Color3.new(1,0,1),Color3.new(0.33333334326744,0.33333334326744,1),Color3.new(1,0.33333334326744,1),Color3.new(0.33333334326744,0.66666668653488,1),Color3.new(1,0.66666668653488,1),Color3.new(0.33333334326744,1,1),Color3.new(1,1,1)}
-				local customColors = {}
-
-				dragGUI(picker)
-
-				local function updateColor(noupdate)
-					local relativeX,relativeY,relativeStripY = 219 - hue*219, 199 - sat*199, 199 - val*199
-					local hsvColor = Color3.fromHSV(hue,sat,val)
-
-					if noupdate == 2 or not noupdate then
-						hueInput.Text = tostring(math.ceil(359*hue))
-						satInput.Text = tostring(math.ceil(255*sat))
-						valInput.Text = tostring(math.floor(255*val))
-					end
-					if noupdate == 1 or not noupdate then
-						redInput.Text = tostring(math.floor(255*red))
-						greenInput.Text = tostring(math.floor(255*green))
-						blueInput.Text = tostring(math.floor(255*blue))
-					end
-
-					chosenColor = Color3.new(red,green,blue)
-
-					colorScope.Position = UDim2.new(0,relativeX-9,0,relativeY-9)
-					colorStrip.ImageColor3 = Color3.fromHSV(hue,sat,1)
-					colorArrow.Position = UDim2.new(0,-2,0,relativeStripY-4)
-					previewFrame.BackgroundColor3 = chosenColor
-
-					newMt.Color = chosenColor
-					if newMt.Changed then newMt:Changed(chosenColor) end
-				end
-
-				local function colorSpaceInput()
-					local relativeX = mouse.X - colorSpace.AbsolutePosition.X
-					local relativeY = mouse.Y - colorSpace.AbsolutePosition.Y
-
-					if relativeX < 0 then relativeX = 0 elseif relativeX > 219 then relativeX = 219 end
-					if relativeY < 0 then relativeY = 0 elseif relativeY > 199 then relativeY = 199 end
-
-					hue = (219 - relativeX)/219
-					sat = (199 - relativeY)/199
-
-					local hsvColor = Color3.fromHSV(hue,sat,val)
-					red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
-
-					updateColor()
-				end
-
-				local function colorStripInput()
-					local relativeY = mouse.Y - colorStrip.AbsolutePosition.Y
-
-					if relativeY < 0 then relativeY = 0 elseif relativeY > 199 then relativeY = 199 end	
-
-					val = (199 - relativeY)/199
-
-					local hsvColor = Color3.fromHSV(hue,sat,val)
-					red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
-
-					updateColor()
-				end
-
-				local function hookButtons(frame,func)
-					frame.ArrowFrame.Up.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseMovement then
-							frame.ArrowFrame.Up.BackgroundTransparency = 0.5
-						elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-							local releaseEvent,runEvent
-
-							local startTime = tick()
-							local pressing = true
-							local startNum = tonumber(frame.Text)
-
-							if not startNum then return end
-
-							releaseEvent = UserInputService.InputEnded:Connect(function(input)
-								if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-								releaseEvent:Disconnect()
-								pressing = false
-							end)
-
-							startNum = startNum + 1
-							func(startNum)
-							while pressing do
-								if tick()-startTime > 0.3 then
-									startNum = startNum + 1
-									func(startNum)
-								end
-								wait(0.1)
-							end
-						end
-					end)
-
-					frame.ArrowFrame.Up.InputEnded:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseMovement then
-							frame.ArrowFrame.Up.BackgroundTransparency = 1
-						end
-					end)
-
-					frame.ArrowFrame.Down.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseMovement then
-							frame.ArrowFrame.Down.BackgroundTransparency = 0.5
-						elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-							local releaseEvent,runEvent
-
-							local startTime = tick()
-							local pressing = true
-							local startNum = tonumber(frame.Text)
-
-							if not startNum then return end
-
-							releaseEvent = UserInputService.InputEnded:Connect(function(input)
-								if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-								releaseEvent:Disconnect()
-								pressing = false
-							end)
-
-							startNum = startNum - 1
-							func(startNum)
-							while pressing do
-								if tick()-startTime > 0.3 then
-									startNum = startNum - 1
-									func(startNum)
-								end
-								wait(0.1)
-							end
-						end
-					end)
-
-					frame.ArrowFrame.Down.InputEnded:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseMovement then
-							frame.ArrowFrame.Down.BackgroundTransparency = 1
-						end
-					end)
-				end
-
-				colorSpace.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						local releaseEvent,mouseEvent
-
-						releaseEvent = UserInputService.InputEnded:Connect(function(input)
-							if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-							releaseEvent:Disconnect()
-							mouseEvent:Disconnect()
-						end)
-
-						mouseEvent = UserInputService.InputChanged:Connect(function(input)
-							if input.UserInputType == Enum.UserInputType.MouseMovement then
-								colorSpaceInput()
-							end
-						end)
-
-						colorSpaceInput()
-					end
-				end)
-
-				colorStrip.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						local releaseEvent,mouseEvent
-
-						releaseEvent = UserInputService.InputEnded:Connect(function(input)
-							if input.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-							releaseEvent:Disconnect()
-							mouseEvent:Disconnect()
-						end)
-
-						mouseEvent = UserInputService.InputChanged:Connect(function(input)
-							if input.UserInputType == Enum.UserInputType.MouseMovement then
-								colorStripInput()
-							end
-						end)
-
-						colorStripInput()
-					end
-				end)
-
-				local function updateHue(str)
-					local num = tonumber(str)
-					if num then
-						hue = math.clamp(math.floor(num),0,359)/359
-						local hsvColor = Color3.fromHSV(hue,sat,val)
-						red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
-						hueInput.Text = tostring(hue*359)
-						updateColor(1)
-					end
-				end
-				hueInput.FocusLost:Connect(function() updateHue(hueInput.Text) end) hookButtons(hueInput,updateHue)
-
-				local function updateSat(str)
-					local num = tonumber(str)
-					if num then
-						sat = math.clamp(math.floor(num),0,255)/255
-						local hsvColor = Color3.fromHSV(hue,sat,val)
-						red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
-						satInput.Text = tostring(sat*255)
-						updateColor(1)
-					end
-				end
-				satInput.FocusLost:Connect(function() updateSat(satInput.Text) end) hookButtons(satInput,updateSat)
-
-				local function updateVal(str)
-					local num = tonumber(str)
-					if num then
-						val = math.clamp(math.floor(num),0,255)/255
-						local hsvColor = Color3.fromHSV(hue,sat,val)
-						red,green,blue = hsvColor.r,hsvColor.g,hsvColor.b
-						valInput.Text = tostring(val*255)
-						updateColor(1)
-					end
-				end
-				valInput.FocusLost:Connect(function() updateVal(valInput.Text) end) hookButtons(valInput,updateVal)
-
-				local function updateRed(str)
-					local num = tonumber(str)
-					if num then
-						red = math.clamp(math.floor(num),0,255)/255
-						local newColor = Color3.new(red,green,blue)
-						hue,sat,val = Color3.toHSV(newColor)
-						redInput.Text = tostring(red*255)
-						updateColor(2)
-					end
-				end
-				redInput.FocusLost:Connect(function() updateRed(redInput.Text) end) hookButtons(redInput,updateRed)
-
-				local function updateGreen(str)
-					local num = tonumber(str)
-					if num then
-						green = math.clamp(math.floor(num),0,255)/255
-						local newColor = Color3.new(red,green,blue)
-						hue,sat,val = Color3.toHSV(newColor)
-						greenInput.Text = tostring(green*255)
-						updateColor(2)
-					end
-				end
-				greenInput.FocusLost:Connect(function() updateGreen(greenInput.Text) end) hookButtons(greenInput,updateGreen)
-
-				local function updateBlue(str)
-					local num = tonumber(str)
-					if num then
-						blue = math.clamp(math.floor(num),0,255)/255
-						local newColor = Color3.new(red,green,blue)
-						hue,sat,val = Color3.toHSV(newColor)
-						blueInput.Text = tostring(blue*255)
-						updateColor(2)
-					end
-				end
-				blueInput.FocusLost:Connect(function() updateBlue(blueInput.Text) end) hookButtons(blueInput,updateBlue)
-
-				local colorChoice = Instance.new("TextButton")
-				colorChoice.Name = "Choice"
-				colorChoice.Size = UDim2.new(0,25,0,18)
-				colorChoice.BorderColor3 = Color3.new(96/255,96/255,96/255)
-				colorChoice.Text = ""
-				colorChoice.AutoButtonColor = false
-				colorChoice.ZIndex = 10
-
-				local row = 0
-				local column = 0
-				for i,v in pairs(basicColors) do
-					local newColor = colorChoice:Clone()
-					newColor.BackgroundColor3 = v
-					newColor.Position = UDim2.new(0,1 + 30*column,0,21 + 23*row)
-
-					newColor.MouseButton1Click:Connect(function()
-						red,green,blue = v.r,v.g,v.b
-						local newColor = Color3.new(red,green,blue)
-						hue,sat,val = Color3.toHSV(newColor)
-						updateColor()
-					end)	
-
-					newColor.Parent = basicColorsFrame
-					column = column + 1
-					if column == 6 then row = row + 1 column = 0 end
-				end
-
-				row = 0
-				column = 0
-				for i = 1,12 do
-					local color = customColors[i] or Color3.new(0,0,0)
-					local newColor = colorChoice:Clone()
-					newColor.BackgroundColor3 = color
-					newColor.Position = UDim2.new(0,1 + 30*column,0,20 + 23*row)
-
-					newColor.MouseButton1Click:Connect(function()
-						local curColor = customColors[i] or Color3.new(0,0,0)
-						red,green,blue = curColor.r,curColor.g,curColor.b
-						hue,sat,val = Color3.toHSV(curColor)
-						updateColor()
-					end)
-
-					newColor.MouseButton2Click:Connect(function()
-						customColors[i] = chosenColor
-						newColor.BackgroundColor3 = chosenColor
-					end)
-
-					newColor.Parent = customColorsFrame
-					column = column + 1
-					if column == 6 then row = row + 1 column = 0 end
-				end
-
-				shade1Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,shade1) end end)
-				shade1Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade1Button.BackgroundTransparency = 0.4 end end)
-				shade1Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade1Button.BackgroundTransparency = 0 end end)
-
-				shade2Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,shade2) end end)
-				shade2Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade2Button.BackgroundTransparency = 0.4 end end)
-				shade2Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade2Button.BackgroundTransparency = 0 end end)
-
-				shade3Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,shade3) end end)
-				shade3Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade3Button.BackgroundTransparency = 0.4 end end)
-				shade3Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then shade3Button.BackgroundTransparency = 0 end end)
-
-				text1Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,text1) end end)
-				text1Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then text1Button.BackgroundTransparency = 0.4 end end)
-				text1Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then text1Button.BackgroundTransparency = 0 end end)
-
-				text2Button.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,text2) end end)
-				text2Button.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then text2Button.BackgroundTransparency = 0.4 end end)
-				text2Button.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then text2Button.BackgroundTransparency = 0 end end)
-
-				scrollButton.MouseButton1Click:Connect(function() if newMt.Confirm then newMt:Confirm(chosenColor,scroll) end end)
-				scrollButton.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then scrollButton.BackgroundTransparency = 0.4 end end)
-				scrollButton.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then scrollButton.BackgroundTransparency = 0 end end)
-
-				cancelButton.MouseButton1Click:Connect(function() if newMt.Cancel then newMt:Cancel() end end)
-				cancelButton.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then cancelButton.BackgroundTransparency = 0.4 end end)
-				cancelButton.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then cancelButton.BackgroundTransparency = 0 end end)
-
-				defaultButton.MouseButton1Click:Connect(function() if newMt.Default then newMt:Default() end end)
-				defaultButton.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then defaultButton.BackgroundTransparency = 0.4 end end)
-				defaultButton.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement then defaultButton.BackgroundTransparency = 0 end end)
-
-				pickerExit.MouseButton1Click:Connect(function()
-					picker:TweenPosition(UDim2.new(0.5, -219, 0, -500), "InOut", "Quart", 0.5, true, nil)
-				end)
-
-				updateColor()
-
-				newMt.SetColor = function(self,color)
-					red,green,blue = color.r,color.g,color.b
-					hue,sat,val = Color3.toHSV(color)
-					updateColor()
-				end
-
-				return newMt
-			end
-		end
-
-		picker:TweenPosition(UDim2.new(0.5, -219, 0, 100), "InOut", "Quart", 0.5, true, nil)
-
-		local Npicker = ColorPicker.new()
-		Npicker.Confirm = function(self,color,ctype) updateColors(color,ctype) wait() updatesaves() end
-		Npicker.Cancel = function(self)
-			updateColors(cache_currentShade1,shade1)
-			updateColors(cache_currentShade2,shade2)
-			updateColors(cache_currentShade3,shade3)
-			updateColors(cache_currentText1,text1)
-			updateColors(cache_currentText2,text2)
-			updateColors(cache_currentScroll,scroll)
-			wait()
-			updatesaves()
-		end
-		Npicker.Default = function(self)
-			updateColors(Color3.fromRGB(36, 36, 37),shade1)
-			updateColors(Color3.fromRGB(46, 46, 47),shade2)
-			updateColors(Color3.fromRGB(78, 78, 79),shade3)
-			updateColors(Color3.new(1, 1, 1),text1)
-			updateColors(Color3.new(0, 0, 0),text2)
-			updateColors(Color3.fromRGB(78,78,79),scroll)
-			wait()
-			updatesaves()
-		end
-	else
-		picker:TweenPosition(UDim2.new(0.5, -219, 0, 100), "InOut", "Quart", 0.5, true, nil)
-	end
-end)
 
 
 SettingsButton.MouseButton1Click:Connect(function()
@@ -3756,7 +3132,6 @@ On.MouseButton1Click:Connect(function()
 			StayOpen = false
 			On.BackgroundTransparency = 1
 		end
-		updatesaves()
 	end
 end)
 
@@ -3778,11 +3153,11 @@ Toggle.MouseButton1Down:Connect(function()
 	if logsEnabled then
 		logsEnabled = false
 		Toggle.Text = 'Disabled'
-		updatesaves()
+		
 	else
 		logsEnabled = true
 		Toggle.Text = 'Enabled'
-		updatesaves()
+		
 	end
 end)
 
@@ -3790,11 +3165,11 @@ Toggle_2.MouseButton1Down:Connect(function()
 	if jLogsEnabled then
 		jLogsEnabled = false
 		Toggle_2.Text = 'Disabled'
-		updatesaves()
+		
 	else
 		jLogsEnabled = true
 		Toggle_2.Text = 'Enabled'
-		updatesaves()
+		
 	end
 end)
 
@@ -3819,10 +3194,6 @@ selectJoin.MouseButton1Down:Connect(function()
 	selectChat.BackgroundColor3 = currentShade3
 	selectJoin.BackgroundColor3 = currentShade2
 end)
-
-if not writefileExploit() then
-	notify('Saves','Your exploit does not support read/write file. Your settings will not save.')
-end
 
 ChatLog = function(plr)
 	plr.Chatted:Connect(function(Message)
@@ -3937,7 +3308,7 @@ end)
 Delete.MouseButton1Click:Connect(function()
 	binds = {}
 	refreshbinds()
-	updatesaves()
+	
 	notify('Keybinds Updated','Removed all keybinds')
 end)
 
@@ -3964,13 +3335,13 @@ Positions.MouseButton1Click:Connect(function()
 end)
 
 local selectionBox = Instance.new("SelectionBox")
-selectionBox.Name = randomString()
+selectionBox.Name = ("selectionBox")
 selectionBox.Color3 = Color3.new(255,255,255)
 selectionBox.Adornee = nil
 selectionBox.Parent = PARENT
 
 local selected = Instance.new("SelectionBox")
-selected.Name = randomString()
+selected.Name = ("selected")
 selected.Color3 = Color3.new(0,166,0)
 selected.Adornee = nil
 selected.Parent = PARENT
@@ -4056,14 +3427,14 @@ Delete_3.MouseButton1Click:Connect(function()
 	customAlias = {}
 	aliases = {}
 	notify('Aliases Modified','Removed all aliases')
-	updatesaves()
+	
 	refreshaliases()
 end)
 
 PrefixBox:GetPropertyChangedSignal("Text"):Connect(function()
 	prefix = PrefixBox.Text
 	Cmdbar.PlaceholderText = "Command Bar ("..prefix..")"
-	updatesaves()
+	
 end)
 
 function CamViewport()
@@ -5766,7 +5137,7 @@ function unkeybind(cmd,key)
 		end
 	end
 	refreshbinds()
-	updatesaves()
+	
 	if key == 'RightClick' or key == 'LeftClick' then
 		notify('Keybinds Updated','Unbinded '..key..' from '..cmd)
 	else
@@ -5905,7 +5276,7 @@ Add_2.MouseButton1Click:Connect(function()
 				return
 			end
 			refreshbinds()
-			updatesaves()
+			
 			if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
 				notify('Keybinds Updated','Binded '..keyPressed..' to '..Cmdbar_2.Text..(newToggle and " / "..Cmdbar_3.Text or ""))
 			else
@@ -5980,7 +5351,7 @@ ClickTP.Select.MouseButton1Click:Connect(function()
 	if keySelected then
 		addbind('clicktp',keyPressed,bindChosenKeyUp)
 		refreshbinds()
-		updatesaves()
+		
 		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
 			notify('Keybinds Updated','Binded '..keyPressed..' to click tp')
 		else
@@ -5993,7 +5364,7 @@ ClickDelete.Select.MouseButton1Click:Connect(function()
 	if keySelected then
 		addbind('clickdel',keyPressed,bindChosenKeyUp)
 		refreshbinds()
-		updatesaves()
+		
 		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
 			notify('Keybinds Updated','Binded '..keyPressed..' to click delete')
 		else
@@ -6130,7 +5501,7 @@ function refreshplugins(dontSave)
 			end)
 		end
 		if not dontSave then
-			updatesaves()
+			
 		end
 	end
 end
@@ -6152,7 +5523,7 @@ function LoadPlugin(val,startup)
 				end
 			end
 		end
-		updatesaves()
+		
 
 		print("Original Error: "..tostring(plerror))
 		print("Plugin Error, stack traceback: "..tostring(debug.traceback()))
@@ -6261,7 +5632,7 @@ addcmd('addalias',{},function(args, speaker)
 			customAlias[alias] = v
 			aliases[#aliases + 1] = {CMD = cmd, ALIAS = alias}
 			notify('Aliases Modified',"Added "..alias.." as an alias to "..cmd)
-			updatesaves()
+			
 			refreshaliases()
 			break
 		end
@@ -6280,7 +5651,7 @@ addcmd('removealias',{},function(args, speaker)
 			end
 		end
 		notify('Aliases Modified',"Removed the alias "..alias.." from "..cmd)
-		updatesaves()
+		
 		refreshaliases()
 	end
 end)
@@ -6289,7 +5660,7 @@ addcmd('clraliases',{},function(args, speaker)
 	customAlias = {}
 	aliases = {}
 	notify('Aliases Modified','Removed all aliases')
-	updatesaves()
+	
 	refreshaliases()
 end)
 
@@ -6320,7 +5691,7 @@ end)
 addcmd('keepiy', {}, function(args, speaker)
 	if queueteleport then
 		KeepInfYield = true
-		updatesaves()
+		
 	else
 		notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
 	end
@@ -6329,7 +5700,7 @@ end)
 addcmd('unkeepiy', {}, function(args, speaker)
 	if queueteleport then
 		KeepInfYield = false
-		updatesaves()
+		
 	else
 		notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
 	end
@@ -6338,7 +5709,7 @@ end)
 addcmd('toggleunkeepiy', {}, function(args, speaker)
 	if queueteleport then
 		KeepInfYield = not KeepInfYield
-		updatesaves()
+		
 	else
 		notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
 	end
@@ -6369,7 +5740,7 @@ addcmd('serverinfo',{'info','sinfo'},function(args, speaker)
 		local CopyPlrID = Instance.new("TextButton")
 		local CopyPlcID = Instance.new("TextButton")
 
-		FRAME.Name = randomString()
+		FRAME.Name = ("FRAME")
 		FRAME.Parent = PARENT
 		FRAME.Active = true
 		FRAME.BackgroundTransparency = 1
@@ -6411,7 +5782,7 @@ addcmd('serverinfo',{'info','sinfo'},function(args, speaker)
 		ExitImage.BackgroundTransparency = 1
 		ExitImage.Position = UDim2.new(0, 5, 0, 5)
 		ExitImage.Size = UDim2.new(0, 10, 0, 10)
-		ExitImage.Image = "rbxassetid://14402999641"
+		ExitImage.Image = "rbxassetid://14407889734"
 		ExitImage.ZIndex = 10
 
 		background.Name = "background"
@@ -7008,7 +6379,7 @@ addcmd('cframeflyspeed',{'cflyspeed'},function(args, speaker)
 end)
 
 Floating = false
-floatName = randomString()
+floatName = ("floatname")
 addcmd('float', {'platform'},function(args, speaker)
 	Floating = true
 	local pchar = speaker.Character
@@ -7162,7 +6533,7 @@ addcmd('setwaypoint',{'swp','setwp','spos','saveposition','savepos'},function(ar
 		end
 	end	
 	refreshwaypoints()
-	updatesaves()
+	
 end)
 
 addcmd('waypointpos',{'wpp','setwaypointposition','setpos','setwaypoint','setwaypointpos'},function(args, speaker)
@@ -7175,7 +6546,7 @@ addcmd('waypointpos',{'wpp','setwaypointposition','setpos','setwaypoint','setway
 		end
 	end	
 	refreshwaypoints()
-	updatesaves()
+	
 end)
 
 addcmd('waypoints',{'positions'},function(args, speaker)
@@ -7328,14 +6699,14 @@ addcmd('deletewaypoint',{'dwp','dpos','deleteposition','deletepos'},function(arg
 		end
 	end
 	refreshwaypoints()
-	updatesaves()
+	
 end)
 
 addcmd('clearwaypoints',{'cwp','clearpositions','cpos','clearpos'},function(args, speaker)
 	WayPoints = {}
 	pWayPoints = {}
 	refreshwaypoints()
-	updatesaves()
+	
 	AllWaypoints = {}
 	notify('Modified Waypoints','Removed all waypoints')
 end)
@@ -7359,117 +6730,11 @@ addcmd('cleargamewaypoints',{'cgamewp'},function(args, speaker)
 		end
 	end
 	refreshwaypoints()
-	updatesaves()
+	
 	notify('Modified Waypoints','Deleted game waypoints')
 end)
 
-
-local coreGuiTypeNames = {
-	-- predefined aliases
-	["inventory"] = Enum.CoreGuiType.Backpack,
-	["leaderboard"] = Enum.CoreGuiType.PlayerList,
-	["emotes"] = Enum.CoreGuiType.EmotesMenu
-}
-
 -- Load the full list of enums
-for _, enumItem in ipairs(Enum.CoreGuiType:GetEnumItems()) do
-	coreGuiTypeNames[enumItem.Name:lower()] = enumItem
-end
-
-addcmd('enable',{},function(args, speaker)
-	local input = args[1] and args[1]:lower()
-	if input then
-		if input == "reset" then
-			StarterGui:SetCore("ResetButtonCallback", true)
-		else
-			local coreGuiType = coreGuiTypeNames[input]
-			if coreGuiType then
-				StarterGui:SetCoreGuiEnabled(coreGuiType, true)
-			end
-		end
-	end
-end)
-
-addcmd('disable',{},function(args, speaker)
-	local input = args[1] and args[1]:lower()
-	if input then
-		if input == "reset" then
-			StarterGui:SetCore("ResetButtonCallback", false)
-		else
-			local coreGuiType = coreGuiTypeNames[input]
-			if coreGuiType then
-				StarterGui:SetCoreGuiEnabled(coreGuiType, false)
-			end
-		end
-	end
-end)
-
-
-local invisGUIS = {}
-addcmd('showguis',{},function(args, speaker)
-	for i,v in pairs(speaker:FindFirstChildWhichIsA("PlayerGui"):GetDescendants()) do
-		if (v:IsA("Frame") or v:IsA("ImageLabel") or v:IsA("ScrollingFrame")) and not v.Visible then
-			v.Visible = true
-			if not FindInTable(invisGUIS,v) then
-				table.insert(invisGUIS,v)
-			end
-		end
-	end
-end)
-
-addcmd('unshowguis',{},function(args, speaker)
-	for i,v in pairs(invisGUIS) do
-		v.Visible = false
-	end
-	invisGUIS = {}
-end)
-
-local hiddenGUIS = {}
-addcmd('hideguis',{},function(args, speaker)
-	for i,v in pairs(speaker:FindFirstChildWhichIsA("PlayerGui"):GetDescendants()) do
-		if (v:IsA("Frame") or v:IsA("ImageLabel") or v:IsA("ScrollingFrame")) and v.Visible then
-			v.Visible = false
-			if not FindInTable(hiddenGUIS,v) then
-				table.insert(hiddenGUIS,v)
-			end
-		end
-	end
-end)
-
-addcmd('unhideguis',{},function(args, speaker)
-	for i,v in pairs(hiddenGUIS) do
-		v.Visible = true
-	end
-	hiddenGUIS = {}
-end)
-
-function deleteGuisAtPos()
-	pcall(function()
-		local guisAtPosition = Players.LocalPlayer.PlayerGui:GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
-		for _, gui in pairs(guisAtPosition) do
-			if gui.Visible == true then
-				gui:Destroy()
-			end
-		end
-	end)
-end
-
-local deleteGuiInput
-addcmd('guidelete',{},function(args, speaker)
-	deleteGuiInput = UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-		if not gameProcessedEvent then
-			if input.KeyCode == Enum.KeyCode.Backspace then
-				deleteGuisAtPos()
-			end
-		end
-	end)
-	notify('GUI Delete Enabled','Hover over a GUI and press backspace to delete it')
-end)
-
-addcmd('unguidelete',{'noguidelete'},function(args, speaker)
-	if deleteGuiInput then deleteGuiInput:Disconnect() end
-	notify('GUI Delete Disabled','GUI backspace delete has been disabled')
-end)
 
 local wasStayOpen = StayOpen
 addcmd('hideiy',{},function(args, speaker)
@@ -7696,7 +6961,7 @@ end)
 
 addcmd('esptransparency',{},function(args, speaker)
 	espTransparency = (args[1] and isNumber(args[1]) and args[1]) or 0.3
-    updatesaves()
+	
 end)
 
 local espParts = {}
@@ -8386,7 +7651,7 @@ addcmd('btools',{},function(args, speaker)
 	for i = 1, 4 do
 		local Tool = Instance.new("HopperBin")
 		Tool.BinType = i
-		Tool.Name = randomString()
+		Tool.Name = ("Tool")
 		Tool.Parent = speaker:FindFirstChildOfClass("Backpack")
 	end
 end)
@@ -10696,8 +9961,8 @@ addcmd('hatspin',{'spinhats'},function(args, speaker)
 	execCmd('unhatspin')
 	wait(.5)
 	for _,v in pairs(speaker.Character:FindFirstChildOfClass('Humanoid'):GetAccessories()) do
-		local keep = Instance.new("BodyPosition") keep.Name = randomString() keep.Parent = v.Handle
-		local spin = Instance.new("BodyAngularVelocity") spin.Name = randomString() spin.Parent = v.Handle
+		local keep = Instance.new("BodyPosition") keep.Name = ("keep") keep.Parent = v.Handle
+		local spin = Instance.new("BodyAngularVelocity") spin.Name = ("spin") spin.Parent = v.Handle
 		v.Handle:FindFirstChildOfClass("Weld"):Destroy()
 		if args[1] then
 			spin.AngularVelocity = Vector3.new(0, args[1], 0)
@@ -11248,7 +10513,7 @@ addcmd('fling',{},function(args, speaker)
 	execCmd('noclip')
 	wait(.1)
 	local bambam = Instance.new("BodyAngularVelocity")
-	bambam.Name = randomString()
+	bambam.Name = ("bambam")
 	bambam.Parent = getRoot(speaker.Character)
 	bambam.AngularVelocity = Vector3.new(0,99999,0)
 	bambam.MaxTorque = Vector3.new(0,math.huge,0)
@@ -11690,7 +10955,7 @@ addcmd('hovername',{},function(args, speaker)
 	execCmd('unhovername')
 	wait()
 	nameBox = Instance.new("TextLabel")
-	nameBox.Name = randomString()
+	nameBox.Name = ("nameBox")
 	nameBox.Parent = PARENT
 	nameBox.BackgroundTransparency = 1
 	nameBox.Size = UDim2.new(0,200,0,30)
@@ -11702,7 +10967,7 @@ addcmd('hovername',{},function(args, speaker)
 	nameBox.TextXAlignment = Enum.TextXAlignment.Left
 	nameBox.ZIndex = 10
 	nbSelection = Instance.new('SelectionBox')
-	nbSelection.Name = randomString()
+	nbSelection.Name = ("nbSelection")
 	nbSelection.LineThickness = 0.03
 	nbSelection.Color3 = Color3.new(1, 1, 1)
 	local function updateNameBox()
@@ -12213,7 +11478,7 @@ if spawnCmds and #spawnCmds > 0 then
 	for i,v in pairs(spawnCmds) do
 		eventEditor.AddCmd("OnSpawn",{v.COMMAND or "",{0},v.DELAY or 0})
 	end
-	updatesaves()
+	
 end
 
 if loadedEventData then eventEditor.LoadData(loadedEventData) end
@@ -12261,7 +11526,7 @@ task.spawn(function()
 			local Exit = Instance.new("TextButton")
 			local ExitImage = Instance.new("ImageLabel")
 
-			AnnGUI.Name = randomString()
+			AnnGUI.Name = ("AnnGUI")
 			AnnGUI.Parent = PARENT
 			AnnGUI.Active = true
 			AnnGUI.BackgroundTransparency = 1
@@ -12322,7 +11587,7 @@ task.spawn(function()
 			ExitImage.BackgroundTransparency = 1
 			ExitImage.Position = UDim2.new(0, 5, 0, 5)
 			ExitImage.Size = UDim2.new(0, 10, 0, 10)
-			ExitImage.Image = "rbxassetid://14402999641"
+			ExitImage.Image = "rbxassetid://14407889734"
 			ExitImage.ZIndex = 10
 
 			wait(1)
@@ -12351,5 +11616,4 @@ task.spawn(function()
 	Credits:Destroy()
 	IntroBackground:Destroy()
 	minimizeHolder()
-	if table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform()) then notify("Unstable Device", "On mobile, Infinite Yield may have issues or features that are not functioning correctly.") end
 end)
