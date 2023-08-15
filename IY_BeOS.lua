@@ -299,9 +299,9 @@ cmdListLayout.Parent = CMDsF
 SettingsButton.Name = "SettingsButton"
 SettingsButton.Parent = Holder
 SettingsButton.BackgroundTransparency = 1
-SettingsButton.Position = UDim2.new(0, 119, 0, 1)
-SettingsButton.Size = UDim2.new(0.16, 16, 0.014, 15)
-SettingsButton.Image = "rbxassetid://14421079130"
+SettingsButton.Position = UDim2.new(0, 119, 0, 0)
+SettingsButton.Size = UDim2.new(0.25, 16, 0.021, 15)
+SettingsButton.Image = "rbxassetid://14430855273"
 SettingsButton.ZIndex = 11
 
 ReferenceButton = Instance.new("ImageButton")
@@ -310,7 +310,7 @@ ReferenceButton.Parent = Holder
 ReferenceButton.BackgroundTransparency = 1
 ReferenceButton.Position = UDim2.new(0, 100, 0, 2)
 ReferenceButton.Size = UDim2.new(0, 16, 0, 16)
-ReferenceButton.Image = "rbxassetid://14403001205"
+ReferenceButton.Image = "rbxassetid://14430676599"
 ReferenceButton.ZIndex = 11
 
 Settings.Name = "Settings"
