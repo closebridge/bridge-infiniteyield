@@ -248,7 +248,7 @@ Topbar = Instance.new("ImageLabel")
 Topbar.Parent = Holder
 Topbar.Size = UDim2.new(0,250,0,20)
 Topbar.BorderSizePixel = 0
-Topbar.Image = "rbxassetid://14402997377"
+Topbar.Image = "rbxassetid://14430851867"
 Topbar.Transparency = 1
 Topbar.ZIndex = 10
 
@@ -310,7 +310,7 @@ ReferenceButton.Parent = Holder
 ReferenceButton.BackgroundTransparency = 1
 ReferenceButton.Position = UDim2.new(0, 100, 0, 2)
 ReferenceButton.Size = UDim2.new(0, 16, 0, 16)
-ReferenceButton.Image = "rbxassetid://14430676599"
+ReferenceButton.Image = "rbxassetid://14403001205"
 ReferenceButton.ZIndex = 11
 
 Settings.Name = "Settings"
@@ -536,14 +536,15 @@ Title_2.Transparency = 1
 table.insert(shade2,Title_2)
 table.insert(text1,Title_2)
 
+
 TitleImage.Name = "TitleImage"
 TitleImage.Parent = Title_2
 TitleImage.BackgroundColor3 = Color3.new(1, 1, 1)
 TitleImage.BackgroundTransparency = 1
-TitleImage.Position = UDim2.new(1, -256, 0, -1)
+TitleImage.Position = UDim2.new(1, -255, 0, 0)
 TitleImage.Size = UDim2.new(0, 111, 0.1, 17)
 TitleImage.ZIndex = 10
-TitleImage.Image = "rbxassetid://14418438020"
+TitleImage.Image = "rbxassetid://14430853760"
 
 Text_2.Name = "Text"
 Text_2.Parent = Notification
@@ -572,7 +573,7 @@ CloseImage.BackgroundColor3 = Color3.new(1, 1, 1)
 CloseImage.BackgroundTransparency = 1
 CloseImage.Position = UDim2.new(0, 5,0, 2)
 CloseImage.Size = UDim2.new(0.1, 10,0.1, 10)
-CloseImage.Image = "rbxassetid://14402999641"
+CloseImage.Image = "rbxassetid://14407889734"
 CloseImage.ZIndex = 10
 
 PinButton.Name = "PinButton"
