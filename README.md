@@ -6,9 +6,7 @@ A personal repository dedicated to my custom IY theme.
 
 ## Theme showcase
 
-* Coming soon!
-
-[![Theme showcase](https://media.discordapp.net/stickers/1031938879290347540.webp?size=160)](https://media.discordapp.net/stickers/1031938879290347540.webp)
+![Theme showcase](https://media.discordapp.net/attachments/1030086749910749224/1175969627755524128/image.png)
 
 ## Credit
 
