@@ -1,5 +1,5 @@
 if IY_LOADED and not _G.IY_DEBUG == true then
-	-- error("Infinite Yield is already running!",0)
+	-- error("inFinite Yield is already running!", 0)
 	return
 end
 
@@ -14,7 +14,7 @@ if not game:IsLoaded() then
 	notLoaded:Destroy()
 end
 
-currentVersion = '5.9.3'
+currentVersion = '5.9.4'
 
 Players = game:GetService("Players")
 
@@ -209,7 +209,7 @@ Title.Size = UDim2.new(0, 250, 0, 20)
 Title.Font = Enum.Font.SourceSans
 Title.TextSize = 18
 Title.Transparency = 1
---Title.Text = "(Finite Yield) v" .. currentVersion
+Title.Text = "(inFinite Yield) v" .. currentVersion
 
 do
 	local emoji = ({
@@ -1971,12 +1971,14 @@ ChatService = game:GetService("Chat")
 ProximityPromptService = game:GetService("ProximityPromptService")
 StatsService = game:GetService("Stats")
 MaterialService = game:GetService("MaterialService")
+AvatarEditorService = game:GetService("AvatarEditorService")
 
 sethidden = sethiddenproperty or set_hidden_property or set_hidden_prop
 gethidden = gethiddenproperty or get_hidden_property or get_hidden_prop
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
 PlaceId, JobId = game.PlaceId, game.JobId
+local IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform())
 
 function writefileExploit()
 	if writefile then
@@ -4682,6 +4684,8 @@ CMDs[#CMDs + 1] = {NAME = 'norender', DESC = 'Disable 3d Rendering to decrease t
 CMDs[#CMDs + 1] = {NAME = 'render', DESC = 'Enable 3d Rendering'}
 CMDs[#CMDs + 1] = {NAME = 'use2022materials / 2022materials', DESC = 'Enables 2022 material textures'}
 CMDs[#CMDs + 1] = {NAME = 'unuse2022materials / un2022materials', DESC = 'Disables 2022 material textures'}
+CMDs[#CMDs + 1] = {NAME = 'promptr6', DESC = 'Prompts the game to switch your rig type to R6'}
+CMDs[#CMDs + 1] = {NAME = 'promptr15', DESC = 'Prompts the game to switch your rig type to R15'}
 wait()
 
 for i = 1, #CMDs do
@@ -4689,23 +4693,23 @@ for i = 1, #CMDs do
 	newcmd.Parent = CMDsF
 	newcmd.Visible = false
 	newcmd.Text = CMDs[i].NAME
-	newcmd.Name = 'CMD'
-	table.insert(text1,newcmd)
-	if CMDs[i].DESC ~= '' then
+	newcmd.Name = "CMD"
+	table.insert(text1, newcmd)
+	if CMDs[i].DESC ~= "" then
 		newcmd:SetAttribute("Title", CMDs[i].NAME)
 		newcmd:SetAttribute("Desc", CMDs[i].DESC)
 		newcmd.MouseButton1Down:Connect(function()
-			if newcmd.Visible and newcmd.TextTransparency == 0 then
+			if not IsOnMobile and newcmd.Visible and newcmd.TextTransparency == 0 then
 				local currentText = Cmdbar.Text
 				Cmdbar:CaptureFocus()
-				autoComplete(newcmd.Text,currentText)
+				autoComplete(newcmd.Text, currentText)
 				maximizeHolder()
 			end
 		end)
 	end
 end
 
-IndexContents('',true)
+IndexContents("", true)
 
 function checkTT()
 	local t
@@ -6245,11 +6249,11 @@ Close_4.MouseButton1Click:Connect(function()
 	PluginsFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
 end)
 
+local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
-	if State == Enum.TeleportState.Started then
-		if KeepInfYield and queueteleport then
-			queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()")
-		end
+	if KeepInfYield and (not TeleportCheck) and queueteleport then
+TeleportCheck = true
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()")
 	end
 end)
 
@@ -6672,7 +6676,7 @@ addcmd('gametp',{'gameteleport'},function(args, speaker)
 	TeleportService:Teleport(args[1])
 end)
 
-addcmd('rejoin',{'rj'},function(args, speaker)
+addcmd("rejoin", {"rj"}, function(args, speaker)
 	if #Players:GetPlayers() <= 1 then
 		Players.LocalPlayer:Kick("\nRejoining...")
 		wait()
@@ -6682,31 +6686,18 @@ addcmd('rejoin',{'rj'},function(args, speaker)
 	end
 end)
 
-addcmd('autorejoin',{'autorj'},function(args, speaker)
-	local Dir = COREGUI:FindFirstChild("RobloxPromptGui"):FindFirstChild("promptOverlay")
-	Dir.DescendantAdded:Connect(function(Err)
-		if Err.Name == "ErrorTitle" then
-			Err:GetPropertyChangedSignal("Text"):Connect(function()
-				if Err.Text:sub(0, 12) == "Disconnected" then
-					if #Players:GetPlayers() <= 1 then
-						Players.LocalPlayer:Kick("\nRejoining...")
-						wait()
-						TeleportService:Teleport(PlaceId, Players.LocalPlayer)
-					else
-						TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
-					end
-				end
-			end)
-		end
+addcmd("autorejoin", {"autorj"}, function(args, speaker)
+	GuiService.ErrorMessageChanged:Connect(function()
+		execCmd("rejoin")
 	end)
-	notify('Auto Rejoin','Auto rejoin enabled')
+	notify("Auto Rejoin", "Auto rejoin enabled")
 end)
 
 addcmd('serverhop',{'shop'},function(args, speaker)
 	-- thanks to NoobSploit for fixing
 	if httprequest then
 		local servers = {}
-		local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100", PlaceId)})
+		local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", PlaceId)})
 		local body = HttpService:JSONDecode(req.Body)
 		if body and body.data then
 			for i, v in next, body.data do
@@ -6912,10 +6903,101 @@ function NOFLY()
 	pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
 end
 
+local velocityHandlerName = randomString()
+local gyroHandlerName = randomString()
+local mfly1
+local mfly2
+
+local unmobilefly = function(speaker)
+	pcall(function()
+		FLYING = false
+		local root = getRoot(speaker.Character)
+		root:FindFirstChild(velocityHandlerName):Destroy()
+		root:FindFirstChild(gyroHandlerName):Destroy()
+		speaker.Character:FindFirstChildWhichIsA("Humanoid").PlatformStand = false
+		mfly1:Disconnect()
+		mfly2:Disconnect()
+	end)
+end
+
+local mobilefly = function(speaker, vfly)
+	unmobilefly(speaker)
+	FLYING = true
+
+	local root = getRoot(speaker.Character)
+	local camera = workspace.CurrentCamera
+	local v3none = Vector3.new()
+	local v3zero = Vector3.new(0, 0, 0)
+	local v3inf = Vector3.new(9e9, 9e9, 9e9)
+
+	local controlModule = require(speaker.PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("ControlModule"))
+	local bv = Instance.new("BodyVelocity")
+	bv.Name = velocityHandlerName
+	bv.Parent = root
+	bv.MaxForce = v3zero
+	bv.Velocity = v3zero
+
+	local bg = Instance.new("BodyGyro")
+	bg.Name = gyroHandlerName
+	bg.Parent = root
+	bg.MaxTorque = v3inf
+	bg.P = 1000
+	bg.D = 50
+
+	mfly1 = speaker.CharacterAdded:Connect(function()
+		local bv = Instance.new("BodyVelocity")
+		bv.Name = velocityHandlerName
+		bv.Parent = root
+		bv.MaxForce = v3zero
+		bv.Velocity = v3zero
+
+		local bg = Instance.new("BodyGyro")
+		bg.Name = gyroHandlerName
+		bg.Parent = root
+		bg.MaxTorque = v3inf
+		bg.P = 1000
+		bg.D = 50
+	end)
+
+	mfly2 = RunService.RenderStepped:Connect(function()
+		root = getRoot(speaker.Character)
+		camera = workspace.CurrentCamera
+		if speaker.Character:FindFirstChildWhichIsA("Humanoid") and root and root:FindFirstChild(velocityHandlerName) and root:FindFirstChild(gyroHandlerName) then
+			local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+			local VelocityHandler = root:FindFirstChild(velocityHandlerName)
+			local GyroHandler = root:FindFirstChild(gyroHandlerName)
+
+			VelocityHandler.MaxForce = v3inf
+			GyroHandler.MaxTorque = v3inf
+			if not vfly then humanoid.PlatformStand = true end
+			GyroHandler.CFrame = camera.CoordinateFrame
+			VelocityHandler.Velocity = v3none
+
+			local direction = controlModule:GetMoveVector()
+			if direction.X > 0 then
+				VelocityHandler.Velocity = VelocityHandler.Velocity + camera.CFrame.RightVector * (direction.X * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+			end
+			if direction.X < 0 then
+				VelocityHandler.Velocity = VelocityHandler.Velocity + camera.CFrame.RightVector * (direction.X * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+			end
+			if direction.Z > 0 then
+				VelocityHandler.Velocity = VelocityHandler.Velocity - camera.CFrame.LookVector * (direction.Z * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+			end
+			if direction.Z < 0 then
+				VelocityHandler.Velocity = VelocityHandler.Velocity - camera.CFrame.LookVector * (direction.Z * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+			end
+		end
+	end)
+end
+
 addcmd('fly',{},function(args, speaker)
+if not IsOnMobile then
 	NOFLY()
 	wait()
 	sFLY()
+else
+		mobilefly(speaker)
+	end
 	if args[1] and isNumber(args[1]) then
 		iyflyspeed = args[1]
 	end
@@ -6929,13 +7011,17 @@ addcmd('flyspeed',{'flysp'},function(args, speaker)
 end)
 
 addcmd('unfly',{'nofly','novfly','unvehiclefly','novehiclefly','unvfly'},function(args, speaker)
-	NOFLY()
+	if not IsOnMobile then NOFLY() else unmobilefly(speaker) end
 end)
 
 addcmd('vfly',{'vehiclefly'},function(args, speaker)
+if not IsOnMobile then
 	NOFLY()
 	wait()
 	sFLY(true)
+else
+		mobilefly(speaker, true)
+	end
 	if args[1] and isNumber(args[1]) then
 		vehicleflyspeed = args[1]
 	end
@@ -6943,9 +7029,9 @@ end)
 
 addcmd('togglevfly',{},function(args, speaker)
 	if FLYING then
-		NOFLY()
+		if not IsOnMobile then NOFLY() else unmobilefly(speaker) end
 	else
-		sFLY(true)
+		if not IsOnMobile then sFLY(true) else mobilefly(speaker, true) end
 	end
 end)
 
@@ -6966,15 +7052,15 @@ end)
 
 addcmd('togglefly',{},function(args, speaker)
 	if FLYING then
-		NOFLY()
+		if not IsOnMobile then NOFLY() else unmobilefly(speaker) end
 	else
-		sFLY()
+		if not IsOnMobile then sFLY() else mobilefly(speaker) end
 	end
 end)
 
 CFspeed = 50
 addcmd('cframefly', {'cfly'}, function(args, speaker)
-	--Full credit to peyton#9148
+	-- Full credit to peyton#9148 (apeyton)
 	speaker.Character:FindFirstChildOfClass('Humanoid').PlatformStand = true
 	local Head = speaker.Character:WaitForChild("Head")
 	Head.Anchored = true
@@ -8420,24 +8506,43 @@ addcmd('antiafk',{'antiidle'},function(args, speaker)
 	if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Anti Idle','Anti idle is enabled') end
 end)
 
-addcmd('datalimit',{},function(args, speaker)
+addcmd("datalimit", {}, function(args, speaker)
 	if tonumber(args[1]) then
 		NetworkClient:SetOutgoingKBPSLimit(args[1])
 	end
 end)
 
-addcmd('replicationlag',{'backtrack'},function(args, speaker)
+addcmd("replicationlag", {"backtrack"}, function(args, speaker)
 	if tonumber(args[1]) then
 		settings():GetService("NetworkSettings").IncomingReplicationLag = args[1]
 	end
 end)
 
-addcmd('noprompts', {'nopurchaseprompts'}, function(args, speaker)
+addcmd("noprompts", {"nopurchaseprompts"}, function(args, speaker)
 	COREGUI.PurchasePrompt.Enabled = false
 end)
 
-addcmd('showprompts', {'showpurchaseprompts'}, function(args, speaker)
+addcmd("showprompts", {"showpurchaseprompts"}, function(args, speaker)
 	COREGUI.PurchasePrompt.Enabled = true
+end)
+
+promptNewRig = function(speaker, rig)
+	local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+	if humanoid then
+		AvatarEditorService:PromptSaveAvatar(humanoid.HumanoidDescription, Enum.HumanoidRigType[rig])
+		local result = AvatarEditorService.PromptSaveAvatarCompleted:Wait()
+		if result == Enum.AvatarPromptResult.Success then
+			execCmd("reset")
+		end
+	end
+end
+
+addcmd("promptr6", {}, function(args, speaker)
+	promptNewRig(speaker, "R6")
+end)
+
+addcmd("promptr15", {}, function(args, speaker)
+	promptNewRig(speaker, "R15")
 end)
 
 addcmd('age',{},function(args, speaker)
@@ -8663,20 +8768,16 @@ addcmd('vehiclenoclip',{'vnoclip'},function(args, speaker)
 	end
 end)
 
-addcmd('vehicleclip',{'vclip','unvnoclip','unvehiclenoclip'},function(args, speaker)
-	execCmd('clip')
-	for i,v in pairs(vnoclipParts) do
+addcmd("vehicleclip", {"vclip", "unvnoclip", "unvehiclenoclip"}, function(args, speaker)
+	execCmd("clip")
+	for i, v in pairs(vnoclipParts) do
 		v.CanCollide = true
 	end
 	vnoclipParts = {}
 end)
 
-addcmd('togglevnoclip',{},function(args, speaker)
-	if Clip then
-		execCmd('vnoclip')
-	else
-		execCmd('vclip')
-	end
+addcmd("togglevnoclip", {}, function(args, speaker)
+	execCmd(Clip and "vnoclip" or "vclip")
 end)
 
 addcmd('clientbring',{'cbring'},function(args, speaker)
@@ -9124,16 +9225,12 @@ addcmd('invisible',{'invis'},function(args, speaker)
 	notify('Invisible','You now appear invisible to other players')
 end)
 
-addcmd('visible',{'vis'},function(args, speaker)
+addcmd("visible", {"vis"}, function(args, speaker)
 	TurnVisible()
 end)
 
-addcmd('toggleinvis',{},function(args, speaker)
-	if invisRunning then
-		execCmd('visible')
-	else
-		execCmd('invisible')
-	end
+addcmd("toggleinvis", {}, function(args, speaker)
+	execCmd(invisRunning and "visible" or "invisible")
 end)
 
 addcmd('toolinvisible',{'toolinvis','tinvis'},function(args, speaker)
@@ -9175,7 +9272,7 @@ addcmd('toolinvisible',{'toolinvis','tinvis'},function(args, speaker)
 	Char:MoveTo(box.Position + Vector3.new(0,.5,0))
 end)
 
-addcmd('strengthen',{},function(args, speaker)
+addcmd("strengthen", {}, function(args, speaker)
 	for _, child in pairs(speaker.Character:GetDescendants()) do
 		if child.ClassName == "Part" then
 			if args[1] then
@@ -9187,7 +9284,7 @@ addcmd('strengthen',{},function(args, speaker)
 	end
 end)
 
-addcmd('weaken',{},function(args, speaker)
+addcmd("weaken", {}, function(args, speaker)
 	for _, child in pairs(speaker.Character:GetDescendants()) do
 		if child.ClassName == "Part" then
 			if args[1] then
@@ -9199,7 +9296,7 @@ addcmd('weaken',{},function(args, speaker)
 	end
 end)
 
-addcmd('unweaken',{'unstrengthen'},function(args, speaker)
+addcmd("unweaken", {"unstrengthen"}, function(args, speaker)
 	for _, child in pairs(speaker.Character:GetDescendants()) do
 		if child.ClassName == "Part" then
 			child.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.3, 0.5)
@@ -9207,14 +9304,14 @@ addcmd('unweaken',{'unstrengthen'},function(args, speaker)
 	end
 end)
 
-addcmd('breakvelocity', {}, function(args, speaker)
+addcmd("breakvelocity", {}, function(args, speaker)
 	local BeenASecond, V3 = false, Vector3.new(0, 0, 0)
 	delay(1, function()
 		BeenASecond = true
 	end)
 	while not BeenASecond do
 		for _, v in ipairs(speaker.Character:GetDescendants()) do
-			if v.IsA(v, "BasePart") then
+			if v:IsA("BasePart") then
 				v.Velocity, v.RotVelocity = V3, V3
 			end
 		end
@@ -9233,45 +9330,40 @@ addcmd('jpower',{'jumppower','jp'},function(args, speaker)
 	end
 end)
 
-addcmd('maxslopeangle',{'msa'},function(args, speaker)
+addcmd("maxslopeangle", {"msa"}, function(args, speaker)
 	local sangle = args[1] or 89
 	if isNumber(sangle) then
-		speaker.Character:FindFirstChildOfClass('Humanoid').MaxSlopeAngle = sangle
+		speaker.Character:FindFirstChildWhichIsA("Humanoid").MaxSlopeAngle = sangle
 	end
 end)
 
-addcmd('gravity',{'grav'},function(args, speaker)
+addcmd("gravity", {"grav"}, function(args, speaker)
 	local grav = args[1] or 196.2
 	if isNumber(grav) then
 		workspace.Gravity = grav
 	end
 end)
 
-addcmd('hipheight',{'hheight'},function(args, speaker)
-	local height
-	if r15(speaker) then
-		height = args[1] or 2.1
-	else
-		height = args[1] or 0
-	end
-	speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight = height
+addcmd("hipheight", {"hheight"}, function(args, speaker)
+	speaker.Character:FindFirstChildWhichIsA("Humanoid").HipHeight = args[1] or (r15(speaker) and 2.1 or 0)
 end)
 
-addcmd('dance', {}, function(args, speaker)
-	if not r15(speaker) then
+addcmd("dance", {}, function(args, speaker)
+	pcall(execCmd, "undance")
 		local dances = {"27789359", "30196114", "248263260", "45834924", "33796059", "28488254", "52155728"}
+if r15(speaker) then
+		dances = {"3333432454", "4555808220", "4049037604", "4555782893", "10214311282", "10714010337", "10713981723", "10714372526", "10714076981", "10714392151", "11444443576"}
+	end
 		local animation = Instance.new("Animation")
 		animation.AnimationId = "rbxassetid://" .. dances[math.random(1, #dances)]
-		animTrack = speaker.Character:FindFirstChildOfClass('Humanoid'):LoadAnimation(animation)
-		animTrack:Play()
-	else
-		notify('R6 Required', 'This command requires the r6 rig type')
-	end
+		danceTrack = speaker.Character:FindFirstChildWhichIsA("Humanoid"):LoadAnimation(animation)
+		danceTrack.Looped = true
+	danceTrack:Play()
 end)
 
-addcmd('undance',{'nodance'},function(args, speaker)
-	animTrack:Stop()
-	animTrack:Destroy()
+addcmd("undance", {"nodance"}, function(args, speaker)
+	danceTrack:Stop()
+	danceTrack:Destroy()
 end)
 
 addcmd('nolimbs',{'rlimbs'},function(args, speaker)
@@ -9386,44 +9478,37 @@ addcmd('nolegs',{'rlegs'},function(args, speaker)
 	end
 end)
 
-addcmd('sit',{},function(args, speaker)
-	speaker.Character:FindFirstChildOfClass("Humanoid").Sit = true
+addcmd("sit", {}, function(args, speaker)
+	speaker.Character:FindFirstChildWhichIsA("Humanoid").Sit = true
 end)
 
-addcmd('lay', {'laydown'}, function(args, speaker)
-	local Human = speaker.Character and speaker.Character:FindFirstChildOfClass('Humanoid')
-	if not Human then
-		return
-	end
-	Human.Sit = true
-	task.wait(.1)
-	Human.RootPart.CFrame = Human.RootPart.CFrame * CFrame.Angles(math.pi * .5, 0, 0)
-	for _, v in ipairs(Human:GetPlayingAnimationTracks()) do
+addcmd("lay", {"laydown"}, function(args, speaker)
+	local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+	humanoid.Sit = true
+	task.wait(0.1)
+	humanoid.RootPart.CFrame = humanoid.RootPart.CFrame * CFrame.Angles(math.pi * 0.5, 0, 0)
+	for _, v in ipairs(humanoid:GetPlayingAnimationTracks()) do
 		v:Stop()
 	end
 end)
 
-addcmd('sitwalk',{},function(args, speaker)
+addcmd("sitwalk", {}, function(args, speaker)
 	local anims = speaker.Character.Animate
-	local sit = anims.sit:FindFirstChildOfClass("Animation").AnimationId
-	anims.idle:FindFirstChildOfClass("Animation").AnimationId = sit
-	anims.walk:FindFirstChildOfClass("Animation").AnimationId = sit
-	anims.run:FindFirstChildOfClass("Animation").AnimationId = sit
-	anims.jump:FindFirstChildOfClass("Animation").AnimationId = sit
-	if r15(speaker) then
-		speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight = 0.5
-	else
-		speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight = -1.5
-	end
+	local sit = anims.sit:FindFirstChildWhichIsA("Animation").AnimationId
+	anims.idle:FindFirstChildWhichIsA("Animation").AnimationId = sit
+	anims.walk:FindFirstChildWhichIsA("Animation").AnimationId = sit
+	anims.run:FindFirstChildWhichIsA("Animation").AnimationId = sit
+	anims.jump:FindFirstChildWhichIsA("Animation").AnimationId = sit
+	speaker.Character:FindFirstChildWhichIsA("Humanoid").HipHeight = not r15(speaker) and -1.5 or 0.5
 end)
 
 function noSitFunc()
 	wait()
-	if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Sit then
-		Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Sit = false
+	if Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").Sit then
+		Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").Sit = false
 	end
 end
-addcmd('nosit',{},function(args, speaker)
+addcmd("nosit", {}, function(args, speaker)
 	if noSit then noSit:Disconnect() nositDied:Disconnect() end
 	noSit = Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):GetPropertyChangedSignal("Sit"):Connect(noSitFunc)
 	local function nositDiedFunc()
@@ -9434,43 +9519,43 @@ addcmd('nosit',{},function(args, speaker)
 	nositDied = speaker.CharacterAdded:Connect(nositDiedFunc)
 end)
 
-addcmd('unnosit',{},function(args, speaker)
+addcmd("unnosit", {}, function(args, speaker)
 	if noSit then noSit:Disconnect() nositDied:Disconnect() end
 end)
 
-addcmd('jump',{},function(args, speaker)
-	speaker.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+addcmd("jump", {}, function(args, speaker)
+	speaker.Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
 end)
 
 local infJump
-local infJumpDebounce = false
-addcmd('infjump',{'infinitejump'},function(args, speaker)
+infJumpDebounce = false
+addcmd("infjump", {"infinitejump"}, function(args, speaker)
 	if infJump then infJump:Disconnect() end
 	infJumpDebounce = false
 	infJump = UserInputService.JumpRequest:Connect(function()
 		if not infJumpDebounce then
 			infJumpDebounce = true
-			speaker.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+			speaker.Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
 			wait()
 			infJumpDebounce = false
 		end
 	end)
 end)
 
-addcmd('uninfjump',{'uninfinitejump','noinfjump','noinfinitejump'},function(args, speaker)
+addcmd("uninfjump", {"uninfinitejump", "noinfjump", "noinfinitejump"}, function(args, speaker)
 	if infJump then infJump:Disconnect() end
 	infJumpDebounce = false
 end)
 
 local flyjump
-addcmd('flyjump',{},function(args, speaker)
+addcmd("flyjump", {}, function(args, speaker)
 	if flyjump then flyjump:Disconnect() end
-	flyjump = UserInputService.JumpRequest:Connect(function(Jump)
-		Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+	flyjump = UserInputService.JumpRequest:Connect(function()
+		speaker.Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
 	end)
 end)
 
-addcmd('unflyjump',{'noflyjump'},function(args, speaker)
+addcmd("unflyjump", {"noflyjump"}, function(args, speaker)
 	if flyjump then flyjump:Disconnect() end
 end)
 
@@ -10280,47 +10365,42 @@ function getTorso(x)
 	return x:FindFirstChild("Torso") or x:FindFirstChild("UpperTorso") or x:FindFirstChild("LowerTorso") or x:FindFirstChild("HumanoidRootPart")
 end
 
-addcmd('bang',{'rape'},function(args, speaker)
-	execCmd('unbang')
+addcmd("bang", {"rape"}, function(args, speaker)
+	execCmd("unbang")
 	wait()
-	local players = getPlayer(args[1], speaker)
-	for _, v in pairs(players) do
+	local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
 		bangAnim = Instance.new("Animation")
-		if not r15(speaker) then
-			bangAnim.AnimationId = "rbxassetid://148840371"
-		else
-			bangAnim.AnimationId = "rbxassetid://5918726674"
-		end
-		bang = speaker.Character:FindFirstChildOfClass('Humanoid'):LoadAnimation(bangAnim)
-		bang:Play(.1, 1, 1)
-		if args[2] then
-			bang:AdjustSpeed(args[2])
-		else
-			bang:AdjustSpeed(3)
-		end
-		local bangplr = Players[v].Name
-		bangDied = speaker.Character:FindFirstChildOfClass'Humanoid'.Died:Connect(function()
-			bangLoop = bangLoop:Disconnect()
-			bang:Stop()
+		bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+		bang = humanoid:LoadAnimation(bangAnim)
+		bang:Play(0.1, 1, 1)
+		bang:AdjustSpeed(args[2] or 3)
+		bangDied = humanoid.Died:Connect(function()
+						bang:Stop()
 			bangAnim:Destroy()
 			bangDied:Disconnect()
+bangLoop:Disconnect()
 		end)
+if args[1] then
+		local players = getPlayer(args[1], speaker)
+		for _, v in pairs(players) do
+			local bangplr = Players[v].Name
 		local bangOffet = CFrame.new(0, 0, 1.1)
 		bangLoop = RunService.Stepped:Connect(function()
 			pcall(function()
 				local otherRoot = getTorso(Players[bangplr].Character)
-				getRoot(Players.LocalPlayer.Character).CFrame = otherRoot.CFrame * bangOffet
+				getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet
 			end)
 		end)
+end
 	end
 end)
 
-addcmd('unbang',{'unrape'},function(args, speaker)
-	if bangLoop then
-		bangLoop = bangLoop:Disconnect()
-		bangDied:Disconnect()
+addcmd("unbang", {"unrape"}, function(args, speaker)
+	if bangDied then
+				bangDied:Disconnect()
 		bang:Stop()
 		bangAnim:Destroy()
+bangLoop:Disconnect()
 	end
 end)
 
@@ -10490,7 +10570,7 @@ addcmd('fireclickdetectors',{'firecd','firecds'}, function(args, speaker)
 		if args[1] then
 			local name = getstring(1)
 			for _, descendant in ipairs(workspace:GetDescendants()) do
-				if descendant:IsA("ClickDetector") and descendant.Name == name then
+				if descendant:IsA("ClickDetector") and descendant.Name == name or descandant.Parent.Name == name then
 					fireclickdetector(descendant)
 				end
 			end
@@ -10519,7 +10599,7 @@ addcmd('fireproximityprompts',{'firepp'},function(args, speaker)
 		if args[1] then
 			local name = getstring(1)
 			for _, descendant in ipairs(workspace:GetDescendants()) do
-				if descendant:IsA("ProximityPrompt") and descendant.Name == name then
+				if descendant:IsA("ProximityPrompt") and descendant.Name == name or descandant.Parent.Name == name then
 					fireproximityprompt(descendant)
 				end
 			end
@@ -10967,7 +11047,7 @@ addcmd('touchinterests', {'touchinterest', 'firetouchinterests', 'firetouchinter
 	if args[1] then
 		local name = getstring(1)
 		for _, descendant in ipairs(workspace:GetDescendants()) do
-			if descendant:IsA("TouchTransmitter") and descendant.Name == name then
+			if descendant:IsA("TouchTransmitter") and descendant.Name == name or descandant.Parent.Name == name then
 				touch(descendant)
 			end
 		end
@@ -12124,6 +12204,32 @@ addcmd('removecmd',{'deletecmd'},function(args, speaker)
 	removecmd(args[1])
 end)
 
+if IsOnMobile then
+	local QuickCapture = Instance.new("TextButton")
+	local UICorner = Instance.new("UICorner")
+	QuickCapture.Name = randomString()
+	QuickCapture.Parent = PARENT
+	QuickCapture.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+	QuickCapture.BackgroundTransparency = 0.14
+	QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
+	QuickCapture.Size = UDim2.new(0, 32, 0, 33)
+	QuickCapture.Font = Enum.Font.SourceSansBold
+	QuickCapture.Text = "IY"
+	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
+	QuickCapture.TextSize = 20.000
+	QuickCapture.TextWrapped = true
+	QuickCapture.Draggable = true
+	UICorner.Name = randomString()
+	UICorner.CornerRadius = UDim.new(0.5, 0)
+	UICorner.Parent = QuickCapture
+	QuickCapture.MouseButton1Click:Connect(function()
+		Cmdbar:CaptureFocus()
+		maximizeHolder()
+	end)
+	table.insert(shade1, QuickCapture)
+	table.insert(text1, QuickCapture)
+end
+
 updateColors(currentShade1,shade1)
 updateColors(currentShade2,shade2)
 updateColors(currentShade3,shade3)
@@ -12352,5 +12458,5 @@ task.spawn(function()
 	Credits:Destroy()
 	IntroBackground:Destroy()
 	minimizeHolder()
-	if table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform()) then notify("Unstable Device", "On mobile, Infinite Yield may have issues or features that are not functioning correctly.") end
+	if IsOnMobile then notify("Unstable Device", "On mobile, Infinite Yield may have issues or features that are not functioning correctly.") end
 end)

@@ -30,4 +30,4 @@ A personal repository dedicated to my custom IY theme.
 
 ## Contributing
 
-* Not yet...
+* Contribute to the original repository, not here! (This is delicated to my theme!)
